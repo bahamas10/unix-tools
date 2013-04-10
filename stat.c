@@ -70,7 +70,9 @@ int dostat(const char *fname) {
 		case S_IFREG: printf("regular file\n"); break;
 		case S_IFLNK: printf("symbolic link\n"); break;
 		case S_IFSOCK: printf("socket\n"); break;
+#ifdef S_IFWHT
 		case S_IFWHT: printf("whiteout\n"); break;
+#endif
 		default: printf("unknown filetype\n"); break;
 	}
 	printf("size: %d bytes\n", (int)sb.st_size);
