@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
 	struct utsname buf;
 	int c;
 
-	while ((c = getopt(argc, argv, "ahmnrsv")) != EOF) {
+	while ((c = getopt(argc, argv, "h")) != EOF) {
 		switch (c) {
 			case 'h':
 				usage();
