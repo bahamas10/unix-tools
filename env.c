@@ -14,7 +14,7 @@ extern char **environ;
 
 int main(int argc, char **argv) {
 	if (argc > 1) {
-		usage(0);
+		usage();
 		return 1;
 	}
 	while (*environ != NULL) {
