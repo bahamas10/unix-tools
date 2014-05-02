@@ -1,3 +1,11 @@
+/**
+ * print a file to stdout
+ *
+ * Author: Dave Eddy <dave@daveeddy.com>
+ * Date: 5/1/2014
+ * License: MIT
+ */
+
 #include <errno.h>
 #include <fcntl.h>
 #include <stdio.h>
