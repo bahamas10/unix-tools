@@ -1,4 +1,3 @@
-CC = gcc
 CFLAGS = -Wall
 SRC = $(wildcard *.c)
 BIN = $(patsubst %.c,%,$(SRC))
