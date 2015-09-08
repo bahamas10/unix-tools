@@ -1,4 +1,4 @@
-CFLAGS = -Wall
+CFLAGS = -Wall -std=c99
 SRC = $(wildcard *.c)
 BIN = $(patsubst %.c,%,$(SRC))
 
