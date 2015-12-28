@@ -14,30 +14,31 @@
 #include <sys/uio.h>
 #include <unistd.h>
 
-#define BLOCK_SIZE 512
-
-void pipefile(int, int);
+void pipefd(int, int);
 
 int main(int argc, char **argv) {
+	int fd;
+	int ret = 0;
+	int i;
+
 	if (argc <= 1) {
 		// pipe stdin to stdout
-		pipefile(0, 1);
+		pipefd(0, 1);
 		return 0;
 	}
 
 	// loop the arguments
-	int fd;
-	int ret = 0;
-	for (int i = 1; i < argc; i++) {
+	for (i = 1; i < argc; i++) {
 		// open the file
 		fd = open(argv[i], O_RDONLY);
 		if (fd < 0) {
 			fprintf(stderr, "open %s: %s\n", argv[i], strerror(errno));
-			ret++;
+			ret = 1;
+			continue;
 		}
 
 		// hook the fd to stdout and read it
-		pipefile(fd, 1);
+		pipefd(fd, 1);
 
 		// close the file
 		close(fd);
@@ -46,9 +47,9 @@ int main(int argc, char **argv) {
 	return ret;
 }
 
-void pipefile(int inputfd, int outputfd) {
-	char buf[BLOCK_SIZE];
+void pipefd(int inputfd, int outputfd) {
+	char buf[BUFSIZ];
 	int bytesread = 0;
-	while ((bytesread = read(inputfd, buf, BLOCK_SIZE)) > 0)
+	while ((bytesread = read(inputfd, buf, BUFSIZ)) > 0)
 		write(outputfd, buf, bytesread);
 }
